@@ -159,6 +159,21 @@ namespace DAO
             }
         }
 
+        public async Task<IEnumerable<BillPayment>> GetBillPaymentHistoryOnwer(int accountId)
+        {
+            using (var context = new DataContext())
+            {
+                var billPayment = await context.BillPayment
+                    .Include(b => b.Contract)
+                    .ThenInclude(c => c.Room)
+                    .Include(bp => bp.Contract)
+                    .ThenInclude(c => c.StudentLeadAccount)
+                    .Where(b => b.AccountReceiveId == accountId)
+                    .ToListAsync();
+                return billPayment;
+            }
+        }
+
         public async Task<IEnumerable<BillPayment>> GetBillMonthlyPaymentForMember(int accountId)
         {
             using (var context = new DataContext())

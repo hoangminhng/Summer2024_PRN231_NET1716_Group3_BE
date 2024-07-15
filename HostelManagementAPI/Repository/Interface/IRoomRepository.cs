@@ -10,6 +10,7 @@ namespace Repository.Interface
         Task<RoomListResponseDto> GetRoomById(int roomId);
         Task UpdateRoom(int roomId, RoomRequestDto updateRoomRequestDto);
         Task<IEnumerable<RoomListResponseDto>> GetListRoomsByHostelId(int hostelId);
+        Task<IEnumerable<RoomListResponseDto>> GetListRoomsByHostelIdForContract(int hostelId);
         Task<RoomDetailResponseDto> GetRoomDetailById(int roomId);
         Task UpdateRoomStatus(int roomId, int status);
         Task UploadRoomImage(int roomId, List<string> imageUrls);

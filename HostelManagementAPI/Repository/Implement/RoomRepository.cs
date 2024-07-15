@@ -65,12 +65,18 @@ namespace Repository.Implement
 
 		public async Task<IEnumerable<RoomListResponseDto>> GetListRoomsByHostelId(int hostelId)
 		{
-			var rooms = RoomDao.Instance.GetRoomListByHostelId(hostelId).Result.Where(x => x.Status == (int)RoomEnum.Available || x.Status == (int)RoomEnum.Viewing);
-
-			return _mapper.Map<IEnumerable<RoomListResponseDto>>(rooms);
+			var rooms = await RoomDao.Instance.GetRoomListByHostelId(hostelId);
+            return _mapper.Map<IEnumerable<RoomListResponseDto>>(rooms);
 		}
 
-		public async Task<RoomListResponseDto> GetRoomById(int roomId)
+        public async Task<IEnumerable<RoomListResponseDto>> GetListRoomsByHostelIdForContract(int hostelId)
+        {
+            var rooms = await RoomDao.Instance.GetRoomListByHostelId(hostelId);
+            rooms = rooms.Where(x => x.Status == (int)RoomEnum.Available || x.Status == (int)RoomEnum.Viewing || x.Status == (int)RoomEnum.Hire_directly);
+            return _mapper.Map<IEnumerable<RoomListResponseDto>>(rooms);
+        }
+
+        public async Task<RoomListResponseDto> GetRoomById(int roomId)
 		{
 			var room =  await RoomDao.Instance.GetRoomById(roomId);
 

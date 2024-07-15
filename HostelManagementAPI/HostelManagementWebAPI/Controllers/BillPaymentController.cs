@@ -197,6 +197,26 @@ namespace HostelManagementWebAPI.Controllers
             }
         }
 
+        [Authorize(Policy = "Owner")]
+        [HttpGet("owner/bill-payment/payment-history")]
+        public async Task<ActionResult> GetPaymentHistoryOwner()
+        {
+            int accountId = GetLoginAccountId();
+            try
+            {
+                var result = await _billPaymentService.GetPaymentHistoryByOwnerAccount(accountId);
+                return Ok(result);
+            }
+            catch (ServiceException ex)
+            {
+                return BadRequest(new ApiResponseStatus(400, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponseStatus(500, ex.Message));
+            }
+        }
+
         [Authorize(Policy = "Member")]
         [HttpGet("bill-payment/monthly")]
         public async Task<ActionResult> GetBillMonthlyPayment()

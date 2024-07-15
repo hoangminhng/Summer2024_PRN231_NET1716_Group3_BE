@@ -115,7 +115,8 @@ public class AutoMapperProfile : Profile
                 RoomServiceId = rs.RoomServiceId,
                 TypeServiceName = rs.TypeService.TypeName,
                 ServiceName = rs.TypeService.Unit,
-                ServicePrice = rs.Price ?? 0
+                ServicePrice = rs.Price ?? 0,
+                IsSelected = rs.IsSelected ?? false
             }).ToList()))
             .ForMember(dest => dest.InitWaterNumber, opt => opt.MapFrom(src => src.InitWaterNumber))
             .ForMember(dest => dest.InitElectricityNumber, opt => opt.MapFrom(src => src.InitElectricityNumber));

@@ -13,5 +13,6 @@ namespace DTOs.RoomService
         public string TypeServiceName { get; set; }
         public string ServiceName { get; set; }
         public double ServicePrice { get; set; }
+        public bool IsSelected { get; set; }
     }
 }
