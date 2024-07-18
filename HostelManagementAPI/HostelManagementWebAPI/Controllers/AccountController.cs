@@ -2,6 +2,7 @@
 using DTOs;
 using DTOs.Account;
 using DTOs.AccountAuthentication;
+using DTOs.Enum;
 using HostelManagementWebAPI.MessageStatusResponse;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -361,5 +362,24 @@ namespace HostelManagementWebAPI.Controllers
             }
         }
 
+        [HttpGet("check/stautus/{accountID}")]
+        public async Task<IActionResult> CheckStatusAccount(int accountID)
+        {
+            try
+            {
+                var account = await _accountService.GetAccountById(accountID);
+                if(account == null)
+                {
+                    return BadRequest(new ApiResponseStatus(404, "Invalid account"));
+                }
+                else if(account.Status == (int)AccountStatusEnum.Inactive){
+                    return BadRequest(new ApiResponseStatus(404, "Invalid account"));
+                }
+                else
+                {
+                    return Ok();
+                }
+            }
+        }
     }
 }
