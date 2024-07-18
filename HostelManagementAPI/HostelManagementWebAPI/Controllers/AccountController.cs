@@ -362,7 +362,7 @@ namespace HostelManagementWebAPI.Controllers
             }
         }
 
-        [HttpGet("check/stautus/{accountID}")]
+        [HttpGet("check/status/{accountID}")]
         public async Task<IActionResult> CheckStatusAccount(int accountID)
         {
             try
@@ -379,6 +379,10 @@ namespace HostelManagementWebAPI.Controllers
                 {
                     return Ok();
                 }
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new ApiResponseStatus(404, "Invalid account"));
             }
         }
     }
