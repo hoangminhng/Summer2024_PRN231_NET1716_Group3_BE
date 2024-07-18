@@ -20,7 +20,7 @@ namespace Service.Implement
             _messagingService = messagingService;
         }
 
-        public async Task<List<NotificationDto>> GetAllNotifications()
+        public async Task<IEnumerable<NotificationDto>> GetAllNotifications()
         {
             return await _notificationRepository.GetAllNotifications();
         }
@@ -449,6 +449,11 @@ namespace Service.Implement
             {
 
             }
+        }
+
+        public async Task MarkNotificationAsRead(int id)
+        {
+            await _notificationRepository.UpdateNotificationStatus(id);
         }
 
         public async Task SendMemberWhenContractExpired(int accountReceivedId, string? firebaseToken, string name, InformationHouse informationHouse)

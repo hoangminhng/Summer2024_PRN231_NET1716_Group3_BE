@@ -2,6 +2,7 @@
 using HostelManagementWebAPI.MessageStatusResponse;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Formatter;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 using Service.Exceptions;
@@ -25,7 +26,7 @@ namespace HostelManagementWebAPI.Controllers
         [Authorize]
         [EnableQuery]
         [HttpGet]
-        public async Task<ActionResult<List<NotificationDto>>> Get()
+        public async Task<ActionResult<IEnumerable<NotificationDto>>> Get()
         {
             try
             {
@@ -63,11 +64,24 @@ namespace HostelManagementWebAPI.Controllers
             }
         }
 
-        //// PUT api/<NotificationController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
+        // PUT api/<NotificationController>/5
+        [HttpPut("notification")]
+        public async Task<ActionResult> Put([FromODataUri] int key)
+        {
+            try
+            {
+                await _notificationService.MarkNotificationAsRead(key);
+                return Ok();
+            }
+            catch (ServiceException ex)
+            {
+                return BadRequest(new ApiResponseStatus(400, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponseStatus(500, ex.Message));
+            }
+        }
 
         //// DELETE api/<NotificationController>/5
         //[HttpDelete("{id}")]

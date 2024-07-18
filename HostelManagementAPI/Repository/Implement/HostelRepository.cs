@@ -49,7 +49,7 @@ namespace Repository.Implement
 				AccountID = x.AccountID,
 				OwnerName = x.OwnerAccount.Name,
 				Status = x.Status,
-				NumOfAvailableRoom = x.Rooms.Count(r => r.Status == (int)RoomEnum.Available),
+				NumOfAvailableRoom = x.Rooms.Count(r => r.Status == (int)RoomEnum.Available || r.Status == (int)RoomEnum.Viewing),
 				Images = x.Images.Select(i => i.ImageURL).ToList(),
 				NumOfTotalRoom = x.Rooms.Count,
 				CreateDate = x.CreateDate,

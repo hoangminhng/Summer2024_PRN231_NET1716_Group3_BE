@@ -517,11 +517,11 @@ namespace Repository.Implement
             result = result.OrderBy(x => x.PaidDate);
             return result.ToList();
         }
-        
+
         public async Task<NumberService> GetOldNumberServiceElectricAndWater(int roomID)
         {
             var contractNewest = ContractDao.Instance.GetContractsAsync().Result.OrderByDescending(x => x.CreatedDate).FirstOrDefault(x => x.RoomID == roomID);
-            if(contractNewest == null)
+            if (contractNewest == null)
             {
                 return new NumberService
                 {
@@ -566,6 +566,14 @@ namespace Repository.Implement
                 RoomName = x.Contract.Room.RoomName
             });
             return result.ToList();
+        }
+
+        public async Task<IEnumerable<BillPaymentDto>> GetBillPaymentsForOwner(int accountId)
+        {
+            var billPayment = await BillPaymentDao.Instance.GetBillPaymentHistoryOnwer(accountId);
+
+            return _mapper.Map<IEnumerable<BillPaymentDto>>(billPayment);
+
         }
     }
 }

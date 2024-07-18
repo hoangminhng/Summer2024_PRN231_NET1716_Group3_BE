@@ -1,5 +1,5 @@
 using API.Extensions;
-using BusinessObject.Models;
+using DTOs;
 using DTOs.Complain;
 using Hangfire;
 using HostelManagementWebAPI.Extensions;
@@ -31,7 +31,7 @@ builder.Services.Configure<VnPayProperties>(builder.Configuration.GetSection("Vn
 
 var modelBuilder = new ODataConventionModelBuilder();
 modelBuilder.EntitySet<ComplainDto>("Complains");
-modelBuilder.EntitySet<Notification>("Notifications");
+modelBuilder.EntitySet<NotificationDto>("Notifications");
 
 builder.Services.AddControllers().AddOData(
     options => options.Select().Filter().OrderBy().Expand().Count().SetMaxTop(null).AddRouteComponents(

@@ -257,6 +257,7 @@ namespace HostelManagementWebAPI.Controllers
                 }
                 await _roomService.CancelAllAppointmentViewing(createRoomAppointmentDto.RoomId);
                 await _roomService.CreateRoomHiringRequestAsync(createRoomAppointmentDto);
+                await _roomService.ChangeRoomStatus(createRoomAppointmentDto.RoomId, 4);
                 return Ok(new ApiResponseStatus(200, "Create hiring request success"));
 
             }
@@ -422,6 +423,26 @@ namespace HostelManagementWebAPI.Controllers
                 return StatusCode(500, "An error occurred while updating room service prices.");
             }
         }
+
+        [Authorize(policy: "Owner")]
+        [HttpGet("rooms/{hostelId}/list-for-contract")]
+        public async Task<ActionResult> GetListRoomByHostelIdForContract(int hostelId)
+        {
+            try
+            {
+                var rooms = await _roomService.GetListRoomsByHostelIdForContract(hostelId);
+                return Ok(rooms);
+            }
+            catch (ServiceException ex)
+            {
+                return BadRequest(new ApiResponseStatus(400, ex.Message));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ApiResponseStatus(500, ex.Message));
+            }
+        }
+
 
         //      [HttpPost("roomServiceAdd")]
         //      public async Task<IActionResult> AddRoomServices([FromBody] AddRoomServicesDto roomServicesDto)

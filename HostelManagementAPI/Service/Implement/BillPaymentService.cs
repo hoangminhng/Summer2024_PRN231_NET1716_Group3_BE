@@ -232,5 +232,10 @@ namespace Service.Implement
         {
             return await _billPaymentRepository.GetMonthlyBillPaymentForMember(memberId);
         }
+
+        public async Task<IEnumerable<BillPaymentDto>> GetPaymentHistoryByOwnerAccount(int ownerId)
+        {
+            return await _billPaymentRepository.GetBillPaymentsForOwner(ownerId);
+        }
     }
 }

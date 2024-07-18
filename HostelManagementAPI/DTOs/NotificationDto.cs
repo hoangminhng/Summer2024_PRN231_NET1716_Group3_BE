@@ -1,9 +1,11 @@
 ﻿using DTOs.Enum;
+using System.ComponentModel.DataAnnotations;
 
 namespace DTOs
 {
     public class NotificationDto
     {
+        [Key]
         public int? NotificationId { get; set; }
         public int? AccountNoticeId { get; set; }
         public int? ReceiveAccountId { get; set; }

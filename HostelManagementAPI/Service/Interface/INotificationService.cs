@@ -5,8 +5,9 @@ namespace Service.Interface
 {
     public interface INotificationService
     {
-        Task<List<NotificationDto>> GetAllNotifications();
+        Task<IEnumerable<NotificationDto>> GetAllNotifications();
         Task CreateNotification(NotificationDto notificationDto);
+        Task MarkNotificationAsRead(int id);
         Task<List<NotificationDto>> GetNotificationsBaseOnReceiveId(int accountId);
         Task SendMemberWhoGetNewContract(int accountReceivedId, string? firebaseToken, string name, InformationHouse informationHouse);
         Task SendMembersWhoGetDeclineContract(int accountReceivedId, string? firebaseToken, string name, InformationHouse informationHouse);

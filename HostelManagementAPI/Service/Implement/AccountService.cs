@@ -272,7 +272,7 @@ namespace Service.Implement
 
                 accountDto.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(confirmPasswordDtos.NewPassword));
                 accountDto.PasswordSalt = hmac.Key;
-                accountDto.Status = 2; // fix later
+                accountDto.Status = (int?)AccountStatusEnum.Active; // fix later
                 try
                 {
                     await _accountRepository.UpdateAccount(accountDto);
@@ -477,7 +477,8 @@ namespace Service.Implement
             try
             {
                 await _accountRepository.RemoveAccountInDB(accountID);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception($"{ex.Message}");
             }

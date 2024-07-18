@@ -11,7 +11,7 @@ namespace Repository.Interface
             RoomDetailResponseDto hiredRoomDto,
             GetContractDto currentContractDto,
             DateTime billingMonth);
-        Task CreateBillPaymentMonthly (
+        Task CreateBillPaymentMonthly(
             RoomDetailResponseDto hiredRoomDto,
             GetContractDto currentContract,
             RoomBillPaymentDto roomBillPaymentDto,
@@ -28,5 +28,6 @@ namespace Repository.Interface
         Task<IEnumerable<BillPaymentHistoryMember>> GetBillPaymentHistoryMembers(int accountId);
         Task<NumberService> GetOldNumberServiceElectricAndWater(int roomID);
         Task<IEnumerable<BillMonthlyPaymentMember>> GetMonthlyBillPaymentForMember(int accountId);
+        Task<IEnumerable<BillPaymentDto>> GetBillPaymentsForOwner(int accountId);
     }
 }

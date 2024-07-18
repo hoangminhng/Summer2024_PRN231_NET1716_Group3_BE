@@ -43,6 +43,11 @@ namespace Service.Implement
         {
             return await _roomRepository.GetListRoomsByHostelId(hostelId);
         }
+        
+        public async Task<IEnumerable<RoomListResponseDto>> GetListRoomsByHostelIdForContract(int hostelId)
+        {
+            return await _roomRepository.GetListRoomsByHostelIdForContract(hostelId);
+        }
 
         public async Task<IEnumerable<RoomListResponseDto>> GetListRoomByHostelIdForMember(int hostelId)
         {

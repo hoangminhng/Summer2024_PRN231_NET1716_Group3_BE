@@ -15,6 +15,7 @@ namespace Service.Interface
         Task<BillPaymentDto> PrepareBillingForMonthlyPayment(int billpaymentId, int accountId);
         Task<MonthlyBillPaymentResponseDto> GetLastMonthBillPaymentsByOwnerId(int ownerId);
         Task<IEnumerable<BillPaymentHistoryMember>> GetPaymentHistoryByMemberAccount(int memberId);
+        Task<IEnumerable<BillPaymentDto>> GetPaymentHistoryByOwnerAccount(int ownerId);
         Task<NumberService> GetOldNumberServiceElectricAndWater(int roomID);
         Task<IEnumerable<BillMonthlyPaymentMember>> GetMonthlyBillPaymentForMember(int memberId);
 
