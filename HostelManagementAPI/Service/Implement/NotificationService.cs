@@ -292,7 +292,7 @@ namespace Service.Implement
             string title = $"Your complain has been response";
             string body = $"Your complain of room {informationHouse.RoomName} in {informationHouse.HostelName} at {informationHouse.Address} has been answer. Check it out!";
 
-            int type = (int)NotificationTypeEnum.owner_create_bill;
+            int type = (int)NotificationTypeEnum.owner_reply_complain;
             var noti = new NotificationDto
             {
                 ReceiveAccountId = accountReceivedId,
