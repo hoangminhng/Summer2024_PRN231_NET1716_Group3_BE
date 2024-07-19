@@ -50,7 +50,7 @@ namespace DAO
         public async Task<IEnumerable<Hostel>> GetAllHostelsTotalActiveAsync()
         {
             var context = new DataContext();
-            return await context.Hostel.Where(x => x.Status == 0)
+            return await context.Hostel
                 .ToListAsync();
         }
 
