@@ -102,24 +102,24 @@ namespace Repository.Implement
                 }
             }
 
-            double remainingDeposit = (double)(currentContractDto.DepositFee - totalAmount);
-            if (remainingDeposit >= 0)
-            {
-                billPayment.TotalAmount = 0;
-                billPayment.BillPaymentStatus = (int)BillPaymentStatus.Paid;
-                billPayment.PaidDate = DateTime.Now;
-            }
-            else
-            {
-                billPayment.TotalAmount = -remainingDeposit;
-            }
+            //double remainingDeposit = (double)(currentContractDto.DepositFee - totalAmount);
+            //if (remainingDeposit >= 0)
+            //{
+            //    billPayment.TotalAmount = 0;
+            //    billPayment.BillPaymentStatus = (int)BillPaymentStatus.Paid;
+            //    billPayment.PaidDate = DateTime.Now;
+            //}
+            //else
+            //{
+            //    billPayment.TotalAmount = -remainingDeposit;
+            //}
 
-            var currentContract = await ContractDao.Instance.GetContractById(currentContractDto.ContractID);
-            if (currentContract != null)
-            {
-                currentContract.DepositFee = Math.Max(remainingDeposit, 0);
-                await ContractDao.Instance.UpdateAsync(currentContract);
-            }
+            //var currentContract = await ContractDao.Instance.GetContractById(currentContractDto.ContractID);
+            //if (currentContract != null)
+            //{
+            //    currentContract.DepositFee = Math.Max(remainingDeposit, 0);
+            //    await ContractDao.Instance.UpdateAsync(currentContract);
+            //}
 
             await BillPaymentDao.Instance.CreateAsync(billPayment);
         }
@@ -135,19 +135,19 @@ namespace Repository.Implement
 
             totalAmount += (double)currentContractDto.RoomFee;
 
-            if (currentContractDto.DepositFee >= 0)
-            {
-                double remainingDeposit = (double)(currentContractDto.DepositFee - totalAmount);
+            //if (currentContractDto.DepositFee >= 0)
+            //{
+            //    double remainingDeposit = (double)(currentContractDto.DepositFee - totalAmount);
 
-                var currentContract = await ContractDao.Instance.GetContractById(currentContractDto.ContractID);
-                if (currentContract != null)
-                {
-                    currentContract.DepositFee = Math.Max(remainingDeposit, 0);
-                    await ContractDao.Instance.UpdateAsync(currentContract);
-                }
+            //    var currentContract = await ContractDao.Instance.GetContractById(currentContractDto.ContractID);
+            //    if (currentContract != null)
+            //    {
+            //        currentContract.DepositFee = Math.Max(remainingDeposit, 0);
+            //        await ContractDao.Instance.UpdateAsync(currentContract);
+            //    }
 
-                totalAmount -= currentContractDto.DepositFee;
-            }
+            //    totalAmount -= currentContractDto.DepositFee;
+            //}
 
             var billPaymentDetails = new List<BillPaymentDetail>();
             var selectedServices = await RoomServiceDao.Instance.GetRoomServicesIsSelected((int)currentContractDto.RoomID);
