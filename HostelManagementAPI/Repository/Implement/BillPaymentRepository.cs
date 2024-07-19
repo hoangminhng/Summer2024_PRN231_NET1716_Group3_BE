@@ -346,7 +346,7 @@ namespace Repository.Implement
                             var initElectricityService = new BillPaymentDetailResponseDto
                             {
                                 RoomServiceID = service.RoomServiceId,
-                                OldNumberService = contract.InitWaterNumber,
+                                OldNumberService = contract.InitElectricityNumber,
                                 NewNumberService = contract.InitElectricityNumber,
                                 Quantity = 0,
                                 ServiceTotalAmount = 0,
